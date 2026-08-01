@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dockeryautomations.com/schemas/design-output.schema.json",
+  "title": "DA UI/UX Design Intelligence Output",
+  "type": "object",
+  "required": ["request_id", "status", "design_system", "page_structure", "accessibility", "implementation", "validation", "traceability"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "enum": ["passed", "conditionally_passed", "blocked", "failed"]},
+    "design_system": {
+      "type": "object",
+      "required": ["pattern", "style", "colors", "typography", "components", "anti_patterns"],
+      "properties": {
+        "pattern": {"type": "object"},
+        "style": {"type": "object"},
+        "colors": {"type": "object"},
+        "typography": {"type": "object"},
+        "components": {"type": "array", "items": {"type": "object"}},
+        "interactions": {"type": "array", "items": {"type": "string"}},
+        "anti_patterns": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "page_structure": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["sections"],
+        "properties": {
+          "objective": {"type": "string"},
+          "sections": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "primary_cta": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "responsive": {
+      "type": "object",
+      "properties": {
+        "targets": {"type": "array", "items": {"type": "string"}},
+        "rules": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "accessibility": {
+      "type": "object",
+      "required": ["target", "requirements"],
+      "properties": {
+        "target": {"type": "string"},
+        "requirements": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "implementation": {
+      "type": "object",
+      "required": ["build_platform", "guidance"],
+      "properties": {
+        "build_platform": {"type": "string"},
+        "design_platform": {"type": "string"},
+        "guidance": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "validation": {
+      "type": "object",
+      "required": ["checks", "unresolved_items"],
+      "properties": {
+        "checks": {"type": "array", "items": {"type": "object"}},
+        "unresolved_items": {"type": "array", "items": {"type": "object"}},
+        "approvals_required": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "traceability": {
+      "type": "object",
+      "required": ["capability_version", "domains_searched", "rules_applied", "source_context"],
+      "properties": {
+        "capability_version": {"type": "string"},
+        "domains_searched": {"type": "array", "items": {"type": "string"}},
+        "rules_applied": {"type": "array", "items": {"type": "string"}},
+        "source_context": {"type": "array", "items": {"type": "object"}},
+        "conflicts_and_overrides": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
