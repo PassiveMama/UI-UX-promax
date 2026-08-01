@@ -1,0 +1,34 @@
+version: "0.1"
+status: draft
+
+prohibited_patterns:
+  - id: generic_ai_gradient
+    description: Do not default to purple-pink AI gradients unless explicitly approved by the client brand.
+
+  - id: inaccessible_contrast
+    description: Do not recommend color combinations that fail the approved accessibility target.
+
+  - id: emoji_as_interface_icon
+    description: Do not use emojis as functional interface icons when an accessible icon or labeled control is appropriate.
+
+  - id: unapproved_motion
+    description: Do not introduce heavy animation, parallax, autoplay, or motion that conflicts with reduced-motion requirements or client approval.
+
+  - id: style_over_scope
+    description: Do not add pages, features, integrations, or interface complexity outside the approved scope.
+
+  - id: unsupported_social_proof
+    description: Do not fabricate testimonials, customer counts, ratings, awards, impact statistics, or partner logos.
+
+  - id: hidden_primary_action
+    description: Do not bury the primary user action beneath decorative content or unnecessary interaction.
+
+  - id: desktop_only_design
+    description: Do not produce a design direction without defined mobile and tablet behavior.
+
+  - id: client_brand_override_without_record
+    description: Do not replace approved client brand rules with general design recommendations unless the conflict is recorded and approval is requested.
+
+notes:
+  - This file contains DA-specific overrides layered above the general UI UX Pro Max recommendations.
+  - Additional prohibitions must be reviewed before being promoted as canonical.
