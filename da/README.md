@@ -1,54 +1,68 @@
 # Dockery Automations UI/UX Design Intelligence
 
-This directory defines how Dockery Automations uses the existing UI UX Pro Max engine as a governed capability inside the DA Company Brain.
+## Purpose
 
-The underlying engine remains in `src/ui-ux-pro-max/` and continues to provide broad design intelligence, searchable rules, palettes, typography guidance, landing-page patterns, stack guidance, and UX recommendations.
+This directory is the Dockery Automations governance and integration layer for the UI UX Pro Max design-intelligence engine.
 
-The DA layer controls:
+The original engine remains under `src/ui-ux-pro-max/` and continues to provide broad design knowledge, search, reasoning rules, and platform guidance.
 
-- what business and client context may be supplied
-- which Dockery standards govern the work
-- how client-specific information overrides general recommendations
-- which tools and implementation targets are approved
-- what the capability may and may not decide
-- the required output structure
-- the definition of done
+The `da/` layer defines how Dockery Automations may invoke that engine during Client Website Delivery.
 
-## Responsibility boundary
+## Responsibility
 
-This capability is responsible for transforming approved website context into a governed design system and UI/UX specification.
+This capability converts approved client, scope, brand, audience, platform, and Dockery-standard context into a governed UI/UX design specification.
 
-It is not responsible for:
+It does not:
 
-- identifying or authenticating the client
-- approving scope or pricing
-- managing the full website-delivery workflow
-- storing live job state
-- publishing a production website
-- changing canonical Dockery standards
+- identify the client
+- approve scope
+- manage the full website workflow
+- publish a production website
+- control domain, payment, or financial integrations
+- promote execution observations into canonical Company Brain knowledge
 
-## Source of truth
+## Version 1 Structure
 
-- General design intelligence: `src/ui-ux-pro-max/`
-- DA governance and operating contract: `da/`
-- Client-specific context: supplied at runtime by the DA Company Brain execution package
+- `CAPABILITY.md` defines the capability and its boundaries.
+- `CONTEXT-REQUIREMENTS.md` defines required runtime context.
+- `GOVERNANCE-RULES.md` defines authority and escalation rules.
+- `COMPLETION-CONTRACT.md` defines what must be true for the output to be complete.
+- `INTEGRATION-CONTRACT.md` defines the handshake with the Company Brain and execution engine.
+- `schemas/design-input.schema.json` defines the accepted machine-readable input.
+- `schemas/design-output.schema.json` defines the required machine-readable output.
+- `overrides/prohibited-patterns.yaml` defines initial DA design prohibitions.
+- `standards/` contains the core Dockery website, interface, accessibility, and responsive standards.
 
-## Operating sequence
+## Governing Priority
 
-1. Receive a validated DA design request.
-2. Validate required context against `CONTEXT-REQUIREMENTS.md`.
-3. Query the underlying design-intelligence engine.
-4. Apply Dockery standards, client brand constraints, and DA overrides.
-5. Produce output matching `schemas/design-output.schema.json`.
-6. Validate the result against `COMPLETION-CONTRACT.md`.
-7. Return the governed design package to the website-delivery workflow.
+When recommendations conflict, apply this priority order:
 
-## Governing files
+1. approved client scope and legal requirements
+2. client brand standards
+3. Dockery Automations standards and governance
+4. approved platform constraints
+5. UI UX Pro Max recommendations
 
-- `CAPABILITY.md`
-- `CONTEXT-REQUIREMENTS.md`
-- `GOVERNANCE-RULES.md`
-- `COMPLETION-CONTRACT.md`
-- `schemas/design-input.schema.json`
-- `schemas/design-output.schema.json`
-- `overrides/prohibited-patterns.yaml`
+## Runtime Flow
+
+```text
+Website Delivery execution package
+        ↓
+Validate against design input schema
+        ↓
+Apply DA context, governance, standards, and overrides
+        ↓
+Invoke UI UX Pro Max design intelligence
+        ↓
+Validate against design output schema and completion contract
+        ↓
+Return governed design specification to the next Website Delivery stage
+```
+
+## Source of Truth
+
+- Broad UI/UX engine: `src/ui-ux-pro-max/`
+- DA usage governance: `da/`
+- Company-wide Website Delivery authority and routing: Dockery Automations Company Brain
+
+This repository is a specialized execution component. It does not replace the Company Brain.
